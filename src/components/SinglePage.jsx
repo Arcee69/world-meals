@@ -27,15 +27,15 @@ const SinglePage = () => {
     fetchSinglePageApi();
   }, [pageData]);
 
-  console.log(singleData, "Hello");
+  // console.log(singleData, "Hello");
 
   return (
     <div className={mode === true ? "bg-slate-700 w-full h-screen overflow-y-auto overflow-x-hidden" : "bg-white overflow-x-hidden h-screen w-full" }>
       <div className=' xs:mx-5 sm:mx-10 h-14 flex flex-row items-center justify-between'>
-          <div className={mode === true ? "text-white font-semibold text-3xl" : "text-black font-semibold text-3xl"} >
+          <div className={`${mode === true ? "text-white"  : "text-black"} font-semibold xs:text-xl sm:text-3xl `} >
               Explore Meals
           </div>
-          <button className={mode === true ? "text-white font-semibold text-sm" : "text-black font-semibold text-sm"} onClick={handleToggle}>
+          <button className={`${mode === true ? "text-white" : "text-black "} font-semibold text-sm`} onClick={handleToggle}>
             {mode === true ? <FontAwesomeIcon icon={faMoon}/>  : <FontAwesomeIcon icon={faSun} />} 
             {mode === true ? " Dark Mode" : " Light Mode" }
           </button>  
@@ -43,7 +43,7 @@ const SinglePage = () => {
 
       <hr />
 
-      <div className={mode === true ? 'mx-10 mt-5 text-white' : "mx-10 mt-5 text-black" }>
+      <div className={`${mode === true ? 'text-white' : "text-black"} xs:mx-5 sm:mx-10 mt-5 ` }>
         <div 
           className={mode === true ? 'w-24 p-1 bg-gray-500 cursor-pointer mb-3 shadow-outline shadow-2xl' 
                                   : "w-24 p-1 bg-white cursor-pointer mb-3 shadow-outline shadow-2xl "}
@@ -54,13 +54,13 @@ const SinglePage = () => {
         </div>
 
         <div className='flex xs:flex-col sm:flex-row sm:justify-between w-12/12 xs:p-2 sm:p-14 items-center'>
-          <div className='xs:w-12/12 sm:w-12/12'>
-            <div className='w-full flex flex-row justify-between'>
-              <div className='w-6/12'>
-                <img src={singleData?.strMealThumb} alt="food Pic" className='w-4/6'/>
+          <div className='xs:w-11/12 sm:w-12/12'>
+            <div className='xs:w-12/12 sm:w-12/12 flex xs:flex-col  sm:flex-row sm:justify-between'>
+              <div className='xs:w-12/12 sm:w-6/12'>
+                <img src={singleData?.strMealThumb} alt="food Pic" className='xs:w-6/6 sm:w-4/6'/>
                 <div className='text-lg font-medium '>{singleData?.strMeal}</div>
               </div>
-              <div className='w-6/12'>
+              <div className='xs:w-12/12 xs:mt-4 sm:mt-0 sm:w-6/12'>
                 <div className='flex flex-row items-center'>
                   <div className='text-xl font-medium'>Area: </div>
                   <div className='text-lg mt-1 ml-16 '>{singleData?.strArea}</div>  
@@ -71,7 +71,7 @@ const SinglePage = () => {
                 </div> 
                 <div className='flex flex-row'>
                   <div className='text-xl font-medium'>Ingredients: </div>
-                  <div className='text-lg mt-0.5 ml-1'>
+                  <div className='text-lg mt-0.5 xs:w-12/12 sm:w-full ml-1'>
                     {
                     `${singleData?.strIngredient1}, ${singleData?.strIngredient2}, ${singleData?.strIngredient3},
                     ${singleData?.strIngredient4}, ${singleData?.strIngredient5}, ${singleData?.strIngredient6},
@@ -85,7 +85,7 @@ const SinglePage = () => {
                 </div>
                 <div className='flex flex-row'>
                   <div className='text-xl font-medium'>Measures:</div>
-                  <div className='text-lg mt-0.5 ml-5'>
+                  <div className='xs:w-7/12 sm:w-full text-lg mt-0.5 ml-5'>
                     {
                     `${singleData?.strMeasure1}, ${singleData?.strMeasure2}, ${singleData?.strMeasure3},
                     ${singleData?.strMeasure4}, ${singleData?.strMeasure5}, ${singleData?.strMeasure6},
@@ -97,28 +97,24 @@ const SinglePage = () => {
                     }
                   </div>  
                 </div>
-                {/* <div className='flex flex-row'>
-                  <div className='text-xl font-medium'>Instructions: </div>
-                  <div className='text-lg mt-1 ml-2 '>{singleData?.strInstructions}</div>  
-                </div> */}
               </div>
             </div>
 
-            <div className='w-full mt-4'>
-              <div className='flex flex-row'>
+            <div className='w-full mt-4 flex xs:flex-col '>
+              <div className='flex xs:flex-col sm:flex-row'>
                   <div className='text-xl font-medium mt-0.5'>Instructions: </div>
-                  <div className='text-lg mt-1 ml-2 '>{singleData?.strInstructions}</div>  
+                  <div className='xs:w-12/12 xs:text-justify sm:w-full sm:text-left text-lg mt-1 xs:ml-1  sm:ml-2 '>{singleData?.strInstructions}</div>  
               </div>
-              <div className='flex flex-row'>
+              <div className='flex xs:flex-col xs:mt-2 sm:flex-row sm:mt-0'>
                 <div className='text-xl font-medium'>Youtube: </div>
-                <div className='text-lg mt-0.5 ml-1'>
-                  <a href={singleData?.strYoutube} target="_blank" className='underline'>{singleData?.strYoutube}</a>
+                <div className=' xs:w-12/12 xs:text-justify xs:ml-2 sm:w-full sm:text-left text-lg mt-0.5 sm:ml-1'>
+                  <a href={singleData?.strYoutube} target="_blank" className='underline-none cursor-pointer'>{`${singleData?.strYoutube}` || "Not available"}</a>
                 </div>
               </div>
-              <div className='flex flex-row'>
+              <div className='flex xs:flex-col xs:mt-2 sm:flex-row sm:mt-0'>
                 <div className='text-xl font-medium'>Source:</div> 
-                <div className='text-lg mt-0.5 ml-4'>
-                  <a href={singleData?.strSource} target="_blank" className='underline'>{singleData?.strSource}</a>
+                <div className='xs:w-12/12 xs:text-justify xs:ml-2 sm:w-full sm:text-left text-lg mt-0.5 sm:ml-4'>
+                  <a href={singleData?.strSource} target="_blank" className='underline-none cursor-pointer'>{`${singleData?.strSource}`|| "Not available"}</a>
                 </div>
               </div>
             </div>
